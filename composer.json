@@ -1,0 +1,13 @@
+{
+    "name": "spencerm/spnzr-helper-functions",
+    "description": "functions for WP",
+    "type": "wordpress-plugin",
+    "keywords": ["wordpress", "plugin"],
+    "homepage": "https://github.com/spencerm/spnzr-helper-functions/",
+    "authors": [
+        {
+            "name": "Spencer McCormick",
+            "homepage": "https://spnzr.com"
+        }
+    ]
+}
