@@ -1,8 +1,7 @@
 {
     "name": "spencerm/spnzr-helper-functions",
     "description": "functions for WP",
-    "type": "wordpress-plugin",
-    "keywords": ["wordpress", "plugin"],
+    "keywords": ["wordpress"],
     "homepage": "https://github.com/spencerm/spnzr-helper-functions/",
     "authors": [
         {
