@@ -8,5 +8,10 @@
             "name": "Spencer McCormick",
             "homepage": "https://spnzr.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+          "Spnzr\\": ""
+        }
+    }
 }
