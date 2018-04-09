@@ -3,6 +3,67 @@
 
 namespace Spnzr;
 
+
+/**
+ * create <p> element if ACF Pro field exists
+ *
+ * @param  $field string
+ * @return html string
+ * March 2018
+ * used in spnzr
+ *
+ */
+
+function get_paragraph_from_field($field){
+  $data = get_field($field);
+  if(is_string($data)){
+    return "<p>" . esc_html( $data ) . "</p>";
+  } else {
+    return null;
+  }
+}
+/**
+ * override wordpress and output a few classes 
+ *
+ * @param  $more string
+ * @param  $id postid
+ * @return html string
+ * March 2018
+ * used in spnzr
+ *
+ */
+function spnzr_the_classes($more = null, $id = null){
+  if( empty($id) ){
+    global $post;
+    $id = $post->ID;
+  }
+  $cats = get_the_terms($id,'category');
+  $bgs = get_the_terms($id,'spnzr_bgs');
+  if( !empty($cats) || !empty($bgs) || !empty($more) ){
+    $output = "class='";
+    }
+    if(!empty($cats)){
+    foreach ($cats as $cat)
+      $output .= "category-" . $cat->slug . " ";
+    }
+    if(!empty($bgs)){
+    foreach ($bgs as $bg)
+      $output .= $bg->slug . " ";
+    }
+  if ($more)
+    $output .= $more;
+    if (isset($output)){
+     $output .= "'";
+       echo $output;
+    }
+}
+
+/**
+ * one term functions
+ * 
+ *
+ */
+
 function get_first_term($post_id = false, $taxonomy = 'category')
 {
     if ($post_id == false) {
@@ -36,10 +97,36 @@ function the_first_term_link($post_id = false, $taxonomy = 'category')
     }
 }
 /**
+ * create a bg-image div from featured image
+ *
+ * @param  $theme_location string
+ * @return html
+ * 
+ * used in spnzr
+ * 3/2018
+ *
+ */
+function the_bg_image(){
+  if(has_post_thumbnail()){
+    $output = ' data-bg-image="';
+    $output .= get_the_post_thumbnail_url(get_the_ID(),'full');
+    $output .= '"';    
+    $output .= ' style="background-image:url(';
+    $output .= get_the_post_thumbnail_url(get_the_ID(),'full');
+    $output .= ')"';
+    echo $output;
+  }
+}
+
+
+
+/**
  * Renders a really basic nav for WordPress pages
  *
  * @param  $theme_location string
  * @return name string
+ * 
+ * used in NYA
  *
  */
 function get_nav_name($theme_location)
@@ -57,8 +144,10 @@ function get_nav_name($theme_location)
  *
  * @param  $parent_id int
  * @return echos html
+ * 
+ * used in NYA
  *
- */
+ **/
 function page_nav($parent_id = 0)
 {
 /*  post has parents */
